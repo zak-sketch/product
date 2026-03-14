@@ -1,485 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rusinga Trading Company · Premium cleaning solutions</title>
-    <!-- Tailwind + Fonts + Font Awesome -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* custom overlay & smooth scroll */
-        html { scroll-behavior: smooth; }
-        .page-transition { transition: opacity 0.2s ease; }
-        #sourceCodeOverlay { font-family: 'Inter', sans-serif; }
-        /* subtle image background protection (optional) */
-        .gallery-img { object-fit: cover; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Rusinga Trading · professional cleaning | modern showcase</title>
+  <!-- Tailwind + custom layer: lightweight & industry standard -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 (free) crisp icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Inter – clean, modern, highly readable -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    /* smooth image presentation + subtle zoom on cards */
+    .product-card {
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      will-change: transform;
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 8px 28px -6px rgba(0, 70, 50, 0.12);
+      border: 1px solid rgba(209, 250, 229, 0.6);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 38px -12px rgba(5, 100, 70, 0.25);
+      border-color: #10b981;
+    }
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f0fdf4;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.02);
+    }
+    /* category chip styling */
+    .category-chip {
+      background: white;
+      border: 1px solid #d1fae5;
+      color: #065f46;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.15s;
+      box-shadow: 0 2px 6px rgba(0,60,40,0.03);
+      white-space: nowrap;
+    }
+    .category-chip:hover {
+      background: #10b981;
+      color: white;
+      border-color: #10b981;
+      box-shadow: 0 10px 18px -8px rgba(16,185,129,0.4);
+    }
+    /* partner logo container */
+    .partner-logo {
+      width: 140px;
+      height: 90px;
+      object-fit: contain;
+      background: white;
+      border-radius: 1.2rem;
+      padding: 0.6rem 1rem;
+      box-shadow: 0 5px 14px rgba(0, 60, 30, 0.06);
+      transition: all 0.2s;
+      border: 1px solid #e4f5e9;
+    }
+    .partner-logo:hover {
+      transform: scale(1.03);
+      border-color: #34d399;
+      box-shadow: 0 15px 22px -10px #04785740;
+    }
+    /* floating social – refined, subtle */
+    .float-social {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .float-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.3rem;
+      height: 3.3rem;
+      background: white;
+      border-radius: 60px;
+      box-shadow: 0 15px 28px -8px rgba(2, 84, 63, 0.3);
+      color: #115e59;
+      font-size: 1.8rem;
+      transition: all 0.2s ease;
+      border: 1px solid #ccf0db;
+      backdrop-filter: blur(4px);
+    }
+    .float-social a:hover {
+      background: #0d9488;
+      color: white;
+      transform: translateY(-5px) scale(1.08);
+      border-color: #fcd34d;
+    }
+    /* badge hero */
+    .gradient-overlay {
+      background: linear-gradient(92deg, #0f3b3a 0%, #1e635a 70%);
+    }
+    /* price styling – crisp */
+    .current-price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #0b4f4c;
+      line-height: 1.2;
+    }
+    .old-price {
+      font-size: 1.1rem;
+      color: #9ca3af;
+      text-decoration: line-through;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+    /* mobile-first grid improvements */
+    @media (max-width: 640px) {
+      .product-card .current-price { font-size: 1.5rem; }
+    }
+  </style>
 </head>
-<body class="font-['Inter'] antialiased text-gray-800 bg-gray-50">
+<body class="bg-stone-50 text-gray-800 antialiased">
 
-<!-- SOURCE PROTECTION OVERLAY (same behavior) -->
-<div id="sourceCodeOverlay" class="fixed inset-0 bg-black/90 z-[9999] hidden flex-col items-center justify-center text-white p-6 text-center">
-    <i class="fa-solid fa-triangle-exclamation text-5xl text-red-400 mb-4"></i>
-    <h1 class="text-3xl md:text-4xl font-bold mb-3">ACCESS RESTRICTED</h1>
-    <p class="max-w-xl text-gray-300 mb-2">The source code of this website is protected. This measure safeguards the intellectual property of Rusinga Trading Company.</p>
-    <p class="text-gray-400 mb-6">For product inquiries, please use our official channels.</p>
-    <button id="closeOverlay" class="bg-blue-700 hover:bg-blue-800 px-8 py-3 rounded-full font-medium transition">Return to website</button>
-</div>
+  <!-- ===== FLOATING SOCIAL (same as original but sleeker) ===== -->
+  <div class="float-social">
+    <a href="https://wa.me/254733336362?text=Hello%20Rusinga%20Trading" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+254207856955" title="Call 0207 856 955"><i class="fas fa-phone-alt"></i></a>
+    <a href="mailto:info@rusingatrading.co.ke" title="Email"><i class="far fa-envelope"></i></a>
+    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+  </div>
 
-<!-- Floating social icons (right side) -->
-<div class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3 max-md:hidden">
-    <a href="#" class="w-11 h-11 rounded-full bg-[#003366] text-white flex items-center justify-center shadow-lg hover:bg-[#0073e6] hover:-translate-x-1 transition"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" class="w-11 h-11 rounded-full bg-[#003366] text-white flex items-center justify-center shadow-lg hover:bg-[#0073e6] hover:-translate-x-1 transition"><i class="fab fa-twitter"></i></a>
-    <a href="#" class="w-11 h-11 rounded-full bg-[#003366] text-white flex items-center justify-center shadow-lg hover:bg-[#0073e6] hover:-translate-x-1 transition"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="w-11 h-11 rounded-full bg-[#003366] text-white flex items-center justify-center shadow-lg hover:bg-[#0073e6] hover:-translate-x-1 transition"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#" class="w-11 h-11 rounded-full bg-[#003366] text-white flex items-center justify-center shadow-lg hover:bg-[#0073e6] hover:-translate-x-1 transition"><i class="fab fa-whatsapp"></i></a>
-</div>
-
-<!-- HEADER with logo image -->
-<header class="bg-white shadow-md fixed top-0 w-full z-50 border-b border-gray-100">
-    <div class="container mx-auto px-5 flex justify-between items-center h-20">
-        <!-- Logo area: image + company name -->
-        <div class="flex items-center gap-3">
-            <img src="logo.jpg" alt="Rusinga Trading Company logo" class="h-14 w-auto rounded-lg shadow-sm bg-white p-1 object-contain" onerror="this.src='https://placehold.co/60x60/003366/white?text=RTC'">
-            <div class="leading-tight">
-                <span class="block text-xl font-bold text-[#003366]">RUSINGA TRADING</span>
-                <span class="text-xs text-gray-500 italic">“First impression starts with clean”</span>
-            </div>
-        </div>
-
-        <!-- desktop navigation -->
-        <nav class="max-md:hidden">
-            <ul class="flex space-x-8 font-medium">
-                <li><a href="#home" class="nav-link text-[#003366] hover:text-[#0073e6] transition">Home</a></li>
-                <li><a href="#about" class="nav-link text-gray-700 hover:text-[#0073e6] transition">About</a></li>
-                <li><a href="#products" class="nav-link text-gray-700 hover:text-[#0073e6] transition">Products</a></li>
-                <li><a href="#wholesale" class="nav-link text-gray-700 hover:text-[#0073e6] transition">Wholesale</a></li>
-                <li><a href="#contact" class="nav-link text-gray-700 hover:text-[#0073e6] transition">Contact</a></li>
-            </ul>
-        </nav>
-
-        <!-- mobile menu button -->
-        <button id="mobileMenuBtn" class="md:hidden text-2xl text-[#003366]">
-            <i class="fas fa-bars"></i>
-        </button>
+  <!-- ===== STICKY NAVIGATION (minimal, professional) ===== -->
+  <nav class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-emerald-100 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img src="logo.jpg" alt="Rusinga" class="w-10 h-10 rounded-full border-2 border-emerald-200 object-cover">
+        <span class="font-bold text-xl text-emerald-900 tracking-tight">Rusinga<span class="text-amber-600"> Trading</span></span>
+      </div>
+      <div class="hidden md:flex gap-7 text-emerald-800 font-medium">
+        <a href="#" class="hover:text-amber-700 transition">Home</a>
+        <a href="#products" class="hover:text-amber-700 transition">Products</a>
+        <a href="#partners" class="hover:text-amber-700 transition">Partners</a>
+        <a href="#contact" class="hover:text-amber-700 transition">Contact</a>
+      </div>
+      <div class="flex gap-2">
+        <span class="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold hidden sm:block"><i class="far fa-user mr-1"></i> trade</span>
+      </div>
     </div>
+  </nav>
 
-    <!-- mobile navigation (hidden by default) -->
-    <div id="mobileNav" class="hidden md:hidden bg-white border-t border-gray-200 py-4 px-5 flex-col space-y-3 text-base font-medium">
-        <a href="#home" class="nav-link block text-[#003366]">Home</a>
-        <a href="#about" class="nav-link block text-gray-700">About</a>
-        <a href="#products" class="nav-link block text-gray-700">Products</a>
-        <a href="#wholesale" class="nav-link block text-gray-700">Wholesale</a>
-        <a href="#contact" class="nav-link block text-gray-700">Contact</a>
+  <!-- ===== HERO BANNER (preserved imagery, cleaner overlay) ===== -->
+  <section class="relative bg-banner min-h-[85vh] flex items-center" style="background-image: url('main_banner\ .jpeg'); background-size: 80% auto; background-position: center 20%;">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/70 via-teal-900/50 to-emerald-800/40"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 text-white">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-4 mb-6">
+          <!-- <img src="logo.jpg" alt="Rusinga Trading logo" class="w-20 h-20 md:w-28 md:h-28 rounded-full border-4 border-white/90 shadow-2xl object-cover"> -->
+          <h1 class="text-5xl md:text-7xl font-black tracking-tight drop-2xl">Rusinga<span class="text-amber-300"> Trading</span></h1>
+        </div>
+        <p class="text-3xl md:text-5xl font-light italic mb-4 drop-shadow border-l-8 border-amber-300 pl-6"> first impression starts with clean</p>
+        <!-- category chips / keywords from original -->
+        <div class="flex flex-wrap gap-2 text-sm md:text-base mt-6 bg-black/30 backdrop-blur-sm p-4 rounded-2xl w-fit">
+          <span class="px-3 py-1 bg-white/20 rounded-full">LAUNDRY</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full">KITCHEN</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full">FLOOR CARE</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full">HOUSEKEEPING</span>
+        </div>
+        <!-- badges -->
+        <div class="flex flex-wrap gap-3 mt-8">
+          <span class="bg-emerald-800/80 text-white px-5 py-2 rounded-full text-lg shadow-md"><i class="fas fa-industry mr-2"></i>commercial grade</span>
+          <span class="bg-teal-700/80 text-white px-5 py-2 rounded-full text-lg shadow-md"><i class="fas fa-leaf mr-2"></i>eco friendly</span>
+          <span class="bg-amber-600/80 text-white px-5 py-2 rounded-full text-lg shadow-md"><i class="fas fa-soap mr-2"></i>effective</span>
+        </div>
+        <a href="#products" class="mt-12 inline-flex items-center gap-3 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold px-8 py-4 rounded-full text-xl shadow-2xl transition-all"><i class="fas fa-chevron-down"></i> shop products</a>
+      </div>
     </div>
-</header>
+  </section>
 
-<!-- MAIN CONTENT with page sections (single page) -->
-<main class="pt-20"> <!-- offset for fixed header -->
-
-    <!-- HOME section (active by default) -->
-    <section id="home" class="page active-page">
-        <!-- Hero with main-banner.jpeg -->
-        <div class="relative bg-cover bg-center h-[500px] md:h-[600px] flex items-center" style="background-image: url('main-banner.jpeg'); background-image: linear-gradient(rgba(0,51,102,0.75), rgba(0,51,102,0.8)), url('main-banner.jpeg');">
-            <div class="container mx-auto px-5 text-center text-white">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">LAUNDRY · KITCHEN · FLOOR CARE<br>HOUSEKEEPING</h1>
-                <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-8 opacity-95">Quality cleaning solutions for every purpose – gentle, effective, professional.</p>
-                <a href="#products" class="shop-now-btn bg-[#0073e6] hover:bg-[#003366] text-white px-8 py-4 rounded-md font-semibold shadow-xl transition inline-block">Shop now</a>
-            </div>
-        </div>
-
-        <!-- about preview + testimonial (grid) -->
-        <div class="container mx-auto px-5 py-16 md:py-20">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-[#003366] mb-5">About our company</h2>
-                    <p class="text-gray-600 mb-4">At Rusinga Trading Company, we produce high‑quality cleaning solutions that deliver superior cleaning and care for your skin and the environment.</p>
-                    <p class="text-gray-600 mb-6">Our products are crafted with carefully selected ingredients that guarantee freshness, gentleness, and lasting cleanliness.</p>
-                    <a href="#about" class="inline-block border-2 border-[#0073e6] text-[#0073e6] hover:bg-[#0073e6] hover:text-white px-6 py-3 rounded-md font-medium transition">Learn more</a>
-                </div>
-                <div class="bg-blue-50 p-8 rounded-xl shadow-sm relative italic">
-                    <i class="fa-solid fa-quote-left text-5xl text-[#0073e6]/20 absolute top-4 left-4"></i>
-                    <p class="text-lg relative z-10 mb-4">“Rusinga soaps are the best! The hand wash smells amazing and keeps my hands soft.”</p>
-                    <div class="font-semibold text-[#003366] text-right">— Nancy W.</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- featured products (with actual images) -->
-        <div class="bg-white py-16">
-            <div class="container mx-auto px-5">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-[#003366] mb-4">Our featured products</h2>
-                <p class="text-center text-gray-500 max-w-xl mx-auto mb-12">Specially formulated for homes & businesses</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- product card: commercial detergent -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition">
-                        <img src="commercial-detergent.jpeg" alt="Commercial detergent" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Detergent'">
-                        <div class="p-5">
-                            <h3 class="font-bold text-xl text-[#003366] mb-2">Singa Commercial Detergent</h3>
-                            <p class="text-gray-600">Heavy duty formula for industrial laundry, removes tough stains.</p>
-                        </div>
-                    </div>
-                    <!-- product card: fabric softener -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition">
-                        <img src="fabric-softener.jpeg" alt="Fabric softener" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Softener'">
-                        <div class="p-5">
-                            <h3 class="font-bold text-xl text-[#003366] mb-2">Singa Fabric Softener</h3>
-                            <p class="text-gray-600">Leaves clothes silky, fresh, and static‑free with long‑lasting scent.</p>
-                        </div>
-                    </div>
-                    <!-- product card: regular bleach -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition">
-                        <img src="regular-breach.jpeg" alt="Regular bleach" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Bleach'">
-                        <div class="p-5">
-                            <h3 class="font-bold text-xl text-[#003366] mb-2">Singa Regular Bleach</h3>
-                            <p class="text-gray-600">Disinfects and whitens, safe for whites and colorfast fabrics.</p>
-                        </div>
-                    </div>
-                    <!-- product card: washing liquid (dish) -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition">
-                        <img src="washing-liquid.jpeg" alt="Washing liquid" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Washing+Liquid'">
-                        <div class="p-5">
-                            <h3 class="font-bold text-xl text-[#003366] mb-2">Singa Dishwashing Liquid</h3>
-                            <p class="text-gray-600">Cuts grease instantly, gentle on hands – lemon fresh.</p>
-                        </div>
-                    </div>
-                    <!-- extra product with duplicate washing liquid (we can use same image) -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition">
-                        <img src="washing-liquid.jpeg" alt="Washing liquid" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Liquid+Detergent'">
-                        <div class="p-5">
-                            <h3 class="font-bold text-xl text-[#003366] mb-2">Singa Laundry Liquid</h3>
-                            <p class="text-gray-600">Concentrated formula for deep clean, works in all machines.</p>
-                        </div>
-                    </div>
-                    <!-- product card: multi-purpose cleaner (using commercial detergent image for variety) but we'll keep consistency, add one more product with softener image? but we already used. we can add a tile cleaner with detergent image as fallback -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition">
-                        <img src="commercial-detergent.jpeg" alt="Multi purpose cleaner" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Multi+Cleaner'">
-                        <div class="p-5">
-                            <h3 class="font-bold text-xl text-[#003366] mb-2">Singa Multi‑Purpose Cleaner</h3>
-                            <p class="text-gray-600">For floors, counters, tiles – powerful degreaser.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- OUR PARTNERS section (six images) -->
-        <div class="py-16 bg-gray-50">
-            <div class="container mx-auto px-5">
-                <h2 class="text-3xl md:text-4xl font-bold text-center text-[#003366] mb-4">Our trusted partners</h2>
-                <p class="text-center text-gray-500 mb-12">We collaborate with leading names in the industry</p>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-                    <img src="our-patner1.jpeg" alt="partner 1" class="grayscale hover:grayscale-0 transition mx-auto max-h-20 object-contain" onerror="this.src='https://placehold.co/150x80/e6f2ff/003366?text=Partner1'">
-                    <img src="our-patner2.jpeg" alt="partner 2" class="grayscale hover:grayscale-0 transition mx-auto max-h-20 object-contain" onerror="this.src='https://placehold.co/150x80/e6f2ff/003366?text=Partner2'">
-                    <img src="our-patner3.jpeg" alt="partner 3" class="grayscale hover:grayscale-0 transition mx-auto max-h-20 object-contain" onerror="this.src='https://placehold.co/150x80/e6f2ff/003366?text=Partner3'">
-                    <img src="our-patner4.jpeg" alt="partner 4" class="grayscale hover:grayscale-0 transition mx-auto max-h-20 object-contain" onerror="this.src='https://placehold.co/150x80/e6f2ff/003366?text=Partner4'">
-                    <img src="our-patner5.jpg" alt="partner 5" class="grayscale hover:grayscale-0 transition mx-auto max-h-20 object-contain" onerror="this.src='https://placehold.co/150x80/e6f2ff/003366?text=Partner5'">
-                    <img src="our-patner6.jpg" alt="partner 6" class="grayscale hover:grayscale-0 transition mx-auto max-h-20 object-contain" onerror="this.src='https://placehold.co/150x80/e6f2ff/003366?text=Partner6'">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ABOUT page (initially hidden) -->
-    <section id="about" class="page hidden-page py-20">
-        <div class="container mx-auto px-5">
-            <h2 class="text-4xl font-bold text-[#003366] text-center mb-16">About us</h2>
-            <div class="grid md:grid-cols-2 gap-14 items-center">
-                <div>
-                    <h3 class="text-2xl font-semibold text-[#003366] mb-3">Our story</h3>
-                    <p class="text-gray-600 mb-4">Founded with a commitment to quality and cleanliness, Rusinga Trading Company specializes in manufacturing premium liquid soaps for homes, businesses, and institutions.</p>
-                    <p class="text-gray-600 mb-4">We blend modern production techniques with safe, eco-friendly ingredients to create products that clean efficiently and protect your skin.</p>
-                    <h3 class="text-2xl font-semibold text-[#003366] mt-8 mb-3">Our mission</h3>
-                    <p class="text-gray-600">To provide reliable, affordable, and high‑performing cleaning solutions that promote hygiene and well‑being in every household and business.</p>
-                </div>
-                <div class="bg-blue-50 p-8 rounded-2xl italic relative">
-                    <i class="fa-solid fa-quote-left text-6xl text-[#0073e6]/20 absolute top-3 left-3"></i>
-                    <p class="relative z-10 text-lg mb-4">“As a school administrator, I appreciate how Rusinga products are safe for children and effective at maintaining cleanliness.”</p>
-                    <div class="font-semibold text-[#003366] text-right">— Sarah K., School Principal</div>
-                </div>
-            </div>
-
-            <!-- values grid -->
-            <div class="grid md:grid-cols-3 gap-8 mt-20">
-                <div class="bg-white p-8 rounded-xl shadow-md text-center">
-                    <i class="fa-solid fa-award text-4xl text-[#0073e6] mb-4"></i>
-                    <h3 class="text-xl font-bold text-[#003366] mb-2">Quality</h3>
-                    <p class="text-gray-600">We never compromise on product performance or safety.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-md text-center">
-                    <i class="fa-solid fa-leaf text-4xl text-[#0073e6] mb-4"></i>
-                    <h3 class="text-xl font-bold text-[#003366] mb-2">Sustainability</h3>
-                    <p class="text-gray-600">We use biodegradable and eco‑conscious ingredients.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow-md text-center">
-                    <i class="fa-solid fa-users text-4xl text-[#0073e6] mb-4"></i>
-                    <h3 class="text-xl font-bold text-[#003366] mb-2">Customer focus</h3>
-                    <p class="text-gray-600">Every product is made with you in mind.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRODUCTS page (full) -->
-    <section id="products" class="page hidden-page py-20">
-        <div class="container mx-auto px-5">
-            <h2 class="text-4xl font-bold text-[#003366] text-center mb-4">Our complete range</h2>
-            <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12">From home care to industrial strength – discover the Rusinga difference.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- product card (repeat with images) we already have list, but we elaborate more to cover all images -->
-                <div class="bg-white rounded-xl shadow border">
-                    <img src="commercial-detergent.jpeg" class="w-full h-52 object-cover rounded-t-xl" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Detergent'">
-                    <div class="p-5">
-                        <h3 class="font-bold text-xl">Commercial Detergent</h3>
-                        <p>Heavy duty, industrial grade.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow border">
-                    <img src="fabric-softener.jpeg" class="w-full h-52 object-cover rounded-t-xl" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Softener'">
-                    <div class="p-5">
-                        <h3 class="font-bold text-xl">Fabric Softener</h3>
-                        <p>Silky feel, fresh fragrance.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow border">
-                    <img src="regular-breach.jpeg" class="w-full h-52 object-cover rounded-t-xl" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Bleach'">
-                    <div class="p-5">
-                        <h3 class="font-bold text-xl">Regular Bleach</h3>
-                        <p>Whitening & disinfection.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow border">
-                    <img src="washing-liquid.jpeg" class="w-full h-52 object-cover rounded-t-xl" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Washing+Liquid'">
-                    <div class="p-5">
-                        <h3 class="font-bold text-xl">Washing Liquid</h3>
-                        <p>Kitchen grease cutter.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow border">
-                    <img src="washing-liquid.jpeg" class="w-full h-52 object-cover rounded-t-xl" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Laundry+Liquid'">
-                    <div class="p-5">
-                        <h3 class="font-bold text-xl">Laundry Liquid</h3>
-                        <p>Concentrated, all machines.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow border">
-                    <img src="commercial-detergent.jpeg" class="w-full h-52 object-cover rounded-t-xl" onerror="this.src='https://placehold.co/400x300/e6f2ff/003366?text=Tile+Cleaner'">
-                    <div class="p-5">
-                        <h3 class="font-bold text-xl">Tile & Floor Cleaner</h3>
-                        <p>Powerful shine.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-12"><a href="#contact" class="bg-[#0073e6] text-white px-8 py-3 rounded-md font-medium">Request a quote</a></div>
-        </div>
-    </section>
-
-    <!-- WHOLESALE page -->
-    <section id="wholesale" class="page hidden-page py-20">
-        <div class="container mx-auto px-5">
-            <h2 class="text-4xl font-bold text-[#003366] text-center mb-4">Wholesale & distribution</h2>
-            <p class="text-center text-gray-500 max-w-xl mx-auto mb-16">Partner with us to supply quality cleaning products across East Africa.</p>
-            <div class="grid md:grid-cols-2 gap-14">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-4">Why partner with Rusinga?</h3>
-                    <ul class="space-y-4">
-                        <li class="flex gap-3"><i class="fa-regular fa-circle-check text-green-600 text-xl"></i><span><strong>Consistent quality</strong> – every batch tested</span></li>
-                        <li class="flex gap-3"><i class="fa-regular fa-circle-check text-green-600 text-xl"></i><span><strong>Competitive pricing</strong> – attractive wholesale rates</span></li>
-                        <li class="flex gap-3"><i class="fa-regular fa-circle-check text-green-600 text-xl"></i><span><strong>Reliable supply</strong> – on‑time delivery</span></li>
-                        <li class="flex gap-3"><i class="fa-regular fa-circle-check text-green-600 text-xl"></i><span><strong>Custom branding</strong> – private labelling optional</span></li>
-                        <li class="flex gap-3"><i class="fa-regular fa-circle-check text-green-600 text-xl"></i><span><strong>Eco‑friendly</strong> – biodegradable formulas</span></li>
-                    </ul>
-                    <h4 class="font-semibold text-lg mt-8 mb-2">Bulk packaging</h4>
-                    <p>5L · 20L · 25L · custom sizes</p>
-                    <a href="#contact" class="inline-block mt-6 bg-[#003366] text-white px-7 py-3 rounded-md">Become a distributor</a>
-                </div>
-                <div class="bg-blue-50 p-8 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4">Who we supply</h3>
-                    <div class="grid grid-cols-2 gap-3">
-                        <span class="bg-white px-4 py-2 rounded text-center shadow-sm">🏨 Hotels</span>
-                        <span class="bg-white px-4 py-2 rounded text-center shadow-sm">🏫 Schools</span>
-                        <span class="bg-white px-4 py-2 rounded text-center shadow-sm">🏥 Hospitals</span>
-                        <span class="bg-white px-4 py-2 rounded text-center shadow-sm">🏭 Industries</span>
-                        <span class="bg-white px-4 py-2 rounded text-center shadow-sm">🛒 Retailers</span>
-                        <span class="bg-white px-4 py-2 rounded text-center shadow-sm">🏢 Offices</span>
-                    </div>
-                    <div class="mt-8 italic">
-                        <i class="fa-solid fa-quote-left text-[#0073e6]/30 text-3xl"></i>
-                        <p class="mt-2">“As a distributor for 3 years, Rusinga products have been our most reliable line.”</p>
-                        <p class="font-semibold text-right">— James O., Distributor</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT page -->
-    <section id="contact" class="page hidden-page py-20">
-        <div class="container mx-auto px-5">
-            <h2 class="text-4xl font-bold text-[#003366] text-center mb-14">Get in touch</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-4">We’re here to help</h3>
-                    <p class="text-gray-600 mb-8">Whether you need a quote, have questions, or want to become a distributor – our team is ready.</p>
-                    <div class="bg-gray-100 p-6 rounded-lg flex flex-col gap-4">
-                        <div><i class="fa-solid fa-phone text-[#0073e6] mr-3"></i>+254 207 856 955  /  0733 336 362</div>
-                        <div><i class="fa-solid fa-envelope text-[#0073e6] mr-3"></i>info@rusingatrading.co.ke</div>
-                        <div><i class="fa-solid fa-location-dot text-[#0073e6] mr-3"></i>Nairobi, Kenya</div>
-                        <div><i class="fa-regular fa-clock text-[#0073e6] mr-3"></i>Mon-Fri 8am – 5pm</div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 rounded-xl shadow">
-                    <h3 class="text-xl font-bold mb-4">Send a message</h3>
-                    <form>
-                        <input type="text" placeholder="Your name" class="w-full border p-3 rounded mb-4">
-                        <input type="email" placeholder="Email" class="w-full border p-3 rounded mb-4">
-                        <textarea rows="4" placeholder="How can we help?" class="w-full border p-3 rounded mb-4"></textarea>
-                        <button class="bg-[#003366] text-white px-6 py-3 rounded-md w-full">Send enquiry</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- FOOTER -->
-<footer class="bg-[#003366] text-white pt-12 pb-6">
-    <div class="container mx-auto px-5 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-            <h3 class="font-bold text-lg mb-4 border-b border-white/20 pb-2">Rusinga Trading</h3>
-            <p class="text-sm opacity-80">Manufacturers of high‑quality liquid soaps for homes, businesses, and institutions across East Africa.</p>
-            <p class="italic mt-3 text-sm">“First impression starts with clean”</p>
-        </div>
-        <div>
-            <h3 class="font-bold text-lg mb-4 border-b border-white/20 pb-2">Quick links</h3>
-            <ul class="space-y-2 text-sm opacity-80">
-                <li><a href="#home" class="hover:opacity-100">Home</a></li>
-                <li><a href="#about" class="hover:opacity-100">About</a></li>
-                <li><a href="#products" class="hover:opacity-100">Products</a></li>
-                <li><a href="#wholesale" class="hover:opacity-100">Wholesale</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="font-bold text-lg mb-4 border-b border-white/20 pb-2">Products</h3>
-            <ul class="space-y-2 text-sm opacity-80">
-                <li>Hand Wash</li>
-                <li>Dishwashing Liquid</li>
-                <li>Multi‑Purpose Cleaner</li>
-                <li>Industrial Soap</li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="font-bold text-lg mb-4 border-b border-white/20 pb-2">Contact</h3>
-            <ul class="space-y-2 text-sm opacity-80">
-                <li>📞 0207 856 955 / 0733 336 362</li>
-                <li>📧 info@rusingatrading.co.ke</li>
-                <li>📍 Nairobi, Kenya</li>
-            </ul>
-        </div>
+  <!-- ===== DISCOVER CATEGORIES (exactly as reference image structure) ===== -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-5xl md:text-6xl font-light text-emerald-900 mb-2 tracking-tight">DISCOVER YOUR <span class="font-black text-amber-700">PERFECT CLEAN</span></h2>
+      <p class="text-gray-600 text-xl max-w-3xl mx-auto mb-10">Browse curated categories designed for your space, surface & lifestyle.</p>
+      <!-- dynamic category chips (scrollable on mobile) -->
+      <div class="flex flex-wrap justify-center gap-3 overflow-x-auto pb-2 no-scrollbar">
+        <span class="category-chip">Laundry</span>
+        <span class="category-chip">Kitchen</span>
+        <span class="category-chip">Floor care</span>
+        <span class="category-chip">Bathroom</span>
+        <span class="category-chip">Glass & surface</span>
+        <span class="category-chip">Disinfectants</span>
+        <span class="category-chip">Detergents</span>
+        <span class="category-chip">Softener</span>
+      </div>
     </div>
-    <div class="text-center text-sm opacity-60 mt-10 border-t border-white/10 pt-6">© 2025 Rusinga Trading Company. All rights reserved.</div>
-</footer>
+  </section>
 
-<!-- Tawk.to script (keep as provided) -->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/694bd4c11b401c197cbf3119/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
+  <!-- ===== PRODUCTS GRID (industry standard cards with price presentation exactly like reference) ===== -->
+  <section id="products" class="pb-24 pt-6 bg-gradient-to-b from-emerald-50/30 to-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <!-- Product 1: Singa Commercial Detergent (Men Premium Jacket equivalent) -->
+        <div class="product-card group">
+          <div class="overflow-hidden">
+            <img src="commercial_detergent .jpeg" alt="Commercial Detergent" class="product-img" loading="lazy">
+          </div>
+          <div class="p-5 md:p-6">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800">Singa Commercial Detergent</h3>
+            <div class="flex items-baseline mt-2">
+              <!-- <span class="current-price">$24<sup>99</sup></span> -->
+              <!-- <span class="old-price">$29.99</span> -->
+            </div>
+            <p class="text-sm text-gray-500 mt-1 line-clamp-2">heavy duty, low suds – industrial strength</p>
+            <div class="mt-3 flex items-center text-amber-500 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span class="text-gray-500 ml-2">premium</span></div>
+          </div>
+        </div>
+        <!-- Product 2: Singa Fabric Softener (Leather Jacket style) -->
+        <div class="product-card group">
+          <img src="fabric-softener.jpeg" alt="Fabric Softener" class="product-img" loading="lazy">
+          <div class="p-5 md:p-6">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800">Singa Fabric Softener</h3>
+            <div class="flex items-baseline mt-2">
+              <!-- <span class="current-price">$12<sup>50</sup></span> -->
+              <!-- <span class="old-price">$15.99</span> -->
+            </div>
+            <p class="text-sm text-gray-500">long‑lasting freshness, anti‑static</p>
+            <div class="mt-3 flex items-center text-amber-500"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 ml-2">best seller</span></div>
+          </div>
+        </div>
+        <!-- Product 3: Singa Regular Bleach (image: regular-breach.jpeg) -->
+        <div class="product-card group">
+          <img src="regular_bleach.jpeg" alt="Regular Bleach" class="product-img" loading="lazy">
+          <div class="p-5 md:p-6">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800">Singa Regular Bleach</h3>
+            <div class="flex items-baseline mt-2">
+              <!-- <span class="current-price">$8<sup>99</sup></span> -->
+              <!-- <span class="old-price">$11.99</span> -->
+            </div>
+            <p class="text-sm text-gray-500">stain removal & whitening power</p>
+            <div class="mt-3 flex items-center text-amber-500"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><span class="text-gray-500 ml-2">strong</span></div>
+          </div>
+        </div>
+        <!-- Product 4: Singa Washing Liquid (Jeans Jacket style) -->
+        <div class="product-card group">
+          <img src="washing_liquid .jpeg" alt="Washing Liquid" class="product-img" loading="lazy">
+          <div class="p-5 md:p-6">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800">Singa Washing Liquid</h3>
+            <div class="flex items-baseline mt-2">
+              <!-- <span class="current-price">$15<sup>99</sup></span> -->
+              <!-- <span class="old-price">$19.99</span> -->
+            </div>
+            <p class="text-sm text-gray-500">deep clean for laundry & delicate</p>
+            <div class="mt-3 flex items-center text-amber-500"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span class="text-gray-500 ml-2">gentle</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- subtle hint (extra line as per reference: sometimes multiple lines) -->
+      <p class="text-center text-emerald-600 text-sm mt-10 opacity-70"><i class="far fa-clock mr-1"></i> trade discounts available • bulk pricing on request</p>
+    </div>
+  </section>
 
-<!-- Single page navigation + source protection + mobile -->
-<script>
+  <!-- ===== PARTNERS (exactly same 6 images, refined container) ===== -->
+  <section id="partners" class="py-20 bg-white border-y border-teal-100">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-emerald-800 mb-3">🤝 our partners</h2>
+      <p class="text-gray-600 text-lg mb-12">trusted by leading suppliers for quality & consistency</p>
+      <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+        <img src="our_patner1.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner2.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner3.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner4.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner5.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner6.jpeg" alt="partner" class="partner-logo" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KEY VALUE PROPS / WHY US ===== -->
+  <section class="py-14 bg-emerald-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div><i class="fas fa-truck-fast text-5xl text-amber-300 mb-4"></i><h3 class="text-2xl font-bold">Nationwide delivery</h3><p class="text-emerald-100">within 24-48 hrs</p></div>
+      <div><i class="fas fa-certificate text-5xl text-amber-300 mb-4"></i><h3 class="text-2xl font-bold">Commercial grade</h3><p class="text-emerald-100">trusted by hotels & hospitals</p></div>
+      <div><i class="fas fa-hand-holding-heart text-5xl text-amber-300 mb-4"></i><h3 class="text-2xl font-bold">Eco conscious</h3><p class="text-emerald-100">biodegradable & safe</p></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT & LOCATION (glass card) ===== -->
+  <section id="contact" class="py-20 bg-stone-100">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="bg-white/80 backdrop-blur-sm p-8 md:p-12 rounded-4xl shadow-2xl border border-teal-200 text-center">
+        <h2 class="text-4xl font-bold text-emerald-800 mb-8">📞 get in touch</h2>
+        <div class="text-xl md:text-2xl space-y-4">
+          <p><i class="fas fa-phone-alt text-emerald-700 mr-4"></i>0207 856 955  <span class="text-gray-300 mx-3">|</span>  <i class="fab fa-whatsapp text-emerald-700 mr-2"></i>0733 336 362</p>
+          <p><i class="far fa-envelope text-emerald-700 mr-4"></i>info@rusingatrading.co.ke</p>
+          <p><i class="fas fa-map-marker-alt text-emerald-700 mr-4"></i>Nairobi, Kenya</p>
+          <p class="text-sm text-gray-400 mt-8">*call or whatsapp for trade prices & samples</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-emerald-900 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <img src="logo.jpg" alt="logo" class="w-8 h-8 rounded-full border border-white/60">
+        <span class="font-semibold text-xl">Rusinga Trading Company</span>
+      </div>
+      <p class="text-emerald-200 text-sm md:text-base">✨ first impression starts with clean</p>
+      <p class="text-sm text-emerald-300">© 2025 Rusinga Trading — professional cleaning solutions</p>
+    </div>
+  </footer>
+
+  <!-- dynamic year script (tiny) -->
+  <script>
     (function() {
-        // ----- source protection overlay (same as original) -----
-        const overlay = document.getElementById('sourceCodeOverlay');
-        const closeBtn = document.getElementById('closeOverlay');
-
-        function showOverlay() { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function hideOverlay() { overlay.style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-        document.addEventListener('contextmenu', (e) => { e.preventDefault(); showOverlay(); });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault(); showOverlay();
-            }
-        });
-        closeBtn.addEventListener('click', hideOverlay);
-        overlay.addEventListener('click', (e) => { if (e.target === overlay) hideOverlay(); });
-
-        // ----- page navigation (home/about/products/wholesale/contact) -----
-        const pages = document.querySelectorAll('.page');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const mobileNavLinks = document.querySelectorAll('#mobileNav .nav-link');
-        const allLinks = [...navLinks, ...mobileNavLinks];
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileNav = document.getElementById('mobileNav');
-
-        function setActivePage(pageId) {
-            pages.forEach(p => {
-                if (p.id === pageId) {
-                    p.classList.remove('hidden-page');
-                    p.classList.add('active-page');
-                } else {
-                    p.classList.add('hidden-page');
-                    p.classList.remove('active-page');
-                }
-            });
-            // update active class on both navs
-            allLinks.forEach(link => {
-                link.classList.remove('active', 'text-[#0073e6]', 'font-semibold');
-                if (link.getAttribute('href') === `#${pageId}`) {
-                    link.classList.add('active', 'text-[#0073e6]', 'font-semibold');
-                } else {
-                    link.classList.remove('text-[#0073e6]', 'font-semibold');
-                }
-            });
-            // close mobile menu after click
-            mobileNav.classList.add('hidden');
-            document.querySelector('#mobileMenuBtn i').className = 'fas fa-bars';
-        }
-
-        allLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = link.getAttribute('href').substring(1);
-                setActivePage(pageId);
-                window.scrollTo({ top: 80, behavior: 'smooth' });
-            });
-        });
-
-        // mobile menu toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.toggle('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // shop now button
-        document.querySelector('.shop-now-btn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            setActivePage('products');
-            window.scrollTo({ top: 80, behavior: 'smooth' });
-        });
-
-        // default open home
-        setActivePage('home');
+      const footerYear = document.querySelector('footer p:last-child');
+      if (footerYear) {
+        const currentYear = new Date().getFullYear();
+        footerYear.innerHTML = footerYear.innerHTML.replace('2025', currentYear);
+      }
     })();
-</script>
-<style>
-    .page { display: none; }
-    .page.active-page { display: block; }
-    .hidden-page { display: none; }
-    #mobileNav { transition: all 0.2s; }
-    .nav-link.active { color: #0073e6; font-weight: 600; }
-</style>
+  </script>
 </body>
 </html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Rusinga Trading | professional cleaning solutions Kenya</title>
+  <!-- Tailwind + custom layer -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Font: Inter – clean & modern -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    /* product / service card */
+    .service-card {
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 8px 28px -6px rgba(0, 70, 50, 0.08);
+      border: 1px solid rgba(209, 250, 229, 0.5);
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 38px -12px rgba(5, 100, 70, 0.2);
+      border-color: #10b981;
+    }
+    .service-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f0fdf4;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover .service-img {
+      transform: scale(1.02);
+    }
+    /* partner logo */
+    .partner-logo {
+      width: 140px;
+      height: 90px;
+      object-fit: contain;
+      background: white;
+      border-radius: 1.2rem;
+      padding: 0.6rem 1rem;
+      box-shadow: 0 5px 14px rgba(0, 60, 30, 0.04);
+      transition: all 0.2s;
+      border: 1px solid #e4f5e9;
+    }
+    .partner-logo:hover {
+      transform: scale(1.02);
+      border-color: #34d399;
+    }
+    /* floating social */
+    .float-social {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .float-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.3rem;
+      height: 3.3rem;
+      background: white;
+      border-radius: 60px;
+      box-shadow: 0 15px 28px -8px rgba(2, 84, 63, 0.25);
+      color: #115e59;
+      font-size: 1.8rem;
+      transition: all 0.2s ease;
+      border: 1px solid #ccf0db;
+      backdrop-filter: blur(4px);
+    }
+    .float-social a:hover {
+      background: #0d9488;
+      color: white;
+      transform: translateY(-5px) scale(1.08);
+      border-color: #fcd34d;
+    }
+    /* principle cards */
+    .principle-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 8px 24px rgba(0,70,40,0.05);
+      border: 1px solid #ecfdf5;
+      transition: all 0.2s;
+    }
+    .principle-card:hover {
+      border-color: #10b981;
+      box-shadow: 0 16px 32px -12px #05966940;
+    }
+    .principle-number {
+      background: #ecfdf5;
+      color: #047857;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    /* contact card */
+    .contact-card {
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 24px 48px -16px rgba(4, 120, 87, 0.2);
+      border: 1px solid #d1fae5;
+    }
+  </style>
+</head>
+<body class="bg-stone-50 text-gray-800 antialiased">
+
+  <!-- ===== FLOATING SOCIAL ===== -->
+  <div class="float-social">
+    <a href="https://wa.me/254733336362?text=Hello%20Rusinga%20Trading" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="tel:+254207856955" title="Call 0207 856 955"><i class="fas fa-phone-alt"></i></a>
+    <a href="mailto:info@rusingatrading.co.ke" title="Email"><i class="far fa-envelope"></i></a>
+    <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+  </div>
+
+  <!-- ===== STICKY NAVIGATION ===== -->
+  <nav class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-emerald-100 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img src="logo.jpg" alt="Rusinga" class="w-10 h-10 rounded-full border-2 border-emerald-200 object-cover">
+        <span class="font-bold text-xl text-emerald-900 tracking-tight">Rusinga<span class="text-amber-600"> Trading</span></span>
+      </div>
+      <div class="hidden md:flex gap-7 text-emerald-800 font-medium">
+        <a href="#" class="hover:text-amber-700 transition">Home</a>
+        <a href="#products" class="hover:text-amber-700 transition">Products</a>
+        <a href="#partners" class="hover:text-amber-700 transition">Partners</a>
+        <a href="#contact" class="hover:text-amber-700 transition">Contact</a>
+      </div>
+      <div class="flex gap-2">
+        <span class="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-semibold hidden sm:block"><i class="far fa-user mr-1"></i> trade</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO BANNER (your background image) ===== -->
+  <section class="relative min-h-[90vh] flex items-center" style="background-image: url('main-banner.jpeg'); background-size: cover; background-position: center 30%;">
+    <!-- Dark overlay for text contrast -->
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/80 via-teal-900/60 to-emerald-800/50"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-white">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-5 mb-8">
+          <img src="logo.jpg" alt="Rusinga Trading" class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white/90 shadow-2xl object-cover">
+          <h1 class="text-5xl md:text-7xl font-black tracking-tight">Rusinga<span class="text-amber-300"> Trading</span></h1>
+        </div>
+        <p class="text-3xl md:text-5xl font-light italic leading-tight border-l-8 border-amber-300 pl-6">✨ first impression starts with clean</p>
+        <!-- keywords -->
+        <div class="flex flex-wrap gap-3 mt-8 text-sm md:text-base">
+          <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full">LAUNDRY</span>
+          <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full">KITCHEN</span>
+          <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full">FLOOR CARE</span>
+          <span class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full">HOUSEKEEPING</span>
+        </div>
+        <!-- badges -->
+        <div class="flex flex-wrap gap-4 mt-10">
+          <span class="bg-emerald-700/80 text-white px-6 py-3 rounded-full text-lg shadow-md"><i class="fas fa-industry mr-2"></i>commercial grade</span>
+          <span class="bg-teal-700/80 text-white px-6 py-3 rounded-full text-lg shadow-md"><i class="fas fa-leaf mr-2"></i>eco friendly</span>
+          <span class="bg-amber-600/80 text-white px-6 py-3 rounded-full text-lg shadow-md"><i class="fas fa-soap mr-2"></i>effective</span>
+        </div>
+        <a href="#products" class="mt-14 inline-flex items-center gap-3 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold px-10 py-5 rounded-full text-xl shadow-2xl transition-all"><i class="fas fa-chevron-down"></i> explore products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT / WHO WE ARE ===== -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">Who We Are</h2>
+        <div class="w-24 h-1 bg-amber-400 mx-auto mb-8"></div>
+        <p class="text-gray-600 text-lg md:text-xl leading-relaxed">Rusinga Trading Company is a professional cleaning solutions provider headquartered in Nairobi, Kenya. We supply hotels, hospitals, homes, and industries with high-performance, eco-friendly cleaning products. With over a decade of experience, we combine commercial-grade strength with environmental care.</p>
+      </div>
+      <!-- stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 text-center">
+        <div><span class="text-5xl font-black text-emerald-700">10+</span><p class="text-gray-500 text-lg mt-2">Years Experience</p></div>
+        <div><span class="text-5xl font-black text-emerald-700">500+</span><p class="text-gray-500 text-lg mt-2">Happy Clients</p></div>
+        <div><span class="text-5xl font-black text-emerald-700">47</span><p class="text-gray-500 text-lg mt-2">Counties Covered</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OUR PRODUCTS (no prices) ===== -->
+  <section id="products" class="py-24 bg-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-emerald-900">Our Products</h2>
+        <div class="w-24 h-1 bg-amber-400 mx-auto mt-4"></div>
+        <p class="text-gray-600 text-xl mt-6 max-w-2xl mx-auto">Professional strength cleaning solutions for every surface</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Product 1 -->
+        <div class="service-card group">
+          <img src="commercial_detergent.jpeg" alt="Commercial Detergent" class="service-img" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Singa Commercial Detergent</h3>
+            <p class="text-gray-500">Heavy duty, low suds – ideal for industrial laundry and high-volume washing.</p>
+          </div>
+        </div>
+        <!-- Product 2 -->
+        <div class="service-card group">
+          <img src="fabric-softener.jpeg" alt="Fabric Softener" class="service-img" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Singa Fabric Softener</h3>
+            <p class="text-gray-500">Long-lasting freshness, anti-static, and gentle on fabrics.</p>
+          </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="service-card group">
+          <img src="regular_bleach.jpeg" alt="Regular Bleach" class="service-img" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Singa Regular Bleach</h3>
+            <p class="text-gray-500">Powerful stain removal and whitening, safe for commercial use.</p>
+          </div>
+        </div>
+        <!-- Product 4 -->
+        <div class="service-card group">
+          <img src="washing_liquid.jpeg" alt="Washing Liquid" class="service-img" loading="lazy">
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Singa Washing Liquid</h3>
+            <p class="text-gray-500">Deep clean for laundry and delicate fabrics, effective yet gentle.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-center text-emerald-600 text-sm mt-12 opacity-80"><i class="far fa-clock mr-1"></i> trade discounts available • bulk pricing on request</p>
+    </div>
+  </section>
+
+  <!-- ===== PARTNERS ===== -->
+  <section id="partners" class="py-20 bg-white border-y border-teal-100">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-emerald-800 mb-3">🤝 Our Partners</h2>
+      <p class="text-gray-600 text-lg mb-12">Trusted by leading suppliers for quality & consistency</p>
+      <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+        <img src="our_patner1.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner2.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner3.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner4.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner5.jpeg" alt="partner" class="partner-logo" loading="lazy">
+        <img src="our_patner6.jpeg" alt="partner" class="partner-logo" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OPERATIONAL PRINCIPLES / WHY CHOOSE US ===== -->
+  <section class="py-20 bg-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-emerald-900">Our Service Standards</h2>
+        <div class="w-24 h-1 bg-amber-400 mx-auto mt-4"></div>
+        <p class="text-gray-600 text-xl mt-6">Clear principles for professional and efficient delivery</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="principle-card">
+          <div class="principle-number">1</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Strict Time Management</h3>
+          <p class="text-gray-500">Punctual service delivery and adherence to agreed timelines.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">2</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Consultative Approach</h3>
+          <p class="text-gray-500">Meetings charged at fair rates, with clear agendas and outcomes.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">3</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Signed Agreement</h3>
+          <p class="text-gray-500">Formal agreement before commencement ensures clarity.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">4</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Safety & Security</h3>
+          <p class="text-gray-500">Client provides adequate safety measures; we follow strict protocols.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+        <div class="principle-card">
+          <div class="principle-number">5</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Logistics Arranged</h3>
+          <p class="text-gray-500">Client facilitates transport; we coordinate for smooth delivery.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">6</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Payment Terms</h3>
+          <p class="text-gray-500">Flexible structure: 50% deposit, balance on delivery for bulk orders.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">7</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Quality Assurance</h3>
+          <p class="text-gray-500">All products tested for commercial grade and eco‑friendliness.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-number">8</div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Binding Principles</h3>
+          <p class="text-gray-500">Mutually agreed standards for long‑term partnership.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEADERSHIP TEAM ===== -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-emerald-900">Our Leadership</h2>
+        <div class="w-24 h-1 bg-amber-400 mx-auto mt-4"></div>
+        <p class="text-gray-600 text-xl mt-6">Meet the experts behind Rusinga Trading</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="text-center">
+          <div class="w-40 h-40 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-6xl text-emerald-700 border-4 border-white shadow-xl mb-5"><i class="fas fa-user-tie"></i></div>
+          <h3 class="text-2xl font-bold">Fredrick Oloo</h3>
+          <p class="text-emerald-600 font-medium">Director – Operations</p>
+        </div>
+        <div class="text-center">
+          <div class="w-40 h-40 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-6xl text-emerald-700 border-4 border-white shadow-xl mb-5"><i class="fas fa-flask"></i></div>
+          <h3 class="text-2xl font-bold">Jane Wanjiru</h3>
+          <p class="text-emerald-600 font-medium">Head of Product Development</p>
+        </div>
+        <div class="text-center">
+          <div class="w-40 h-40 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-6xl text-emerald-700 border-4 border-white shadow-xl mb-5"><i class="fas fa-handshake"></i></div>
+          <h3 class="text-2xl font-bold">Peter Kipchoge</h3>
+          <p class="text-emerald-600 font-medium">Client Relations Manager</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION (refined card) ===== -->
+  <section id="contact" class="py-24 bg-stone-100">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="contact-card p-8 md:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-4xl font-bold text-emerald-800 mb-8">Get In Touch</h2>
+            <div class="space-y-6 text-lg">
+              <p class="flex items-start gap-4"><i class="fas fa-map-marker-alt text-emerald-600 text-2xl mt-1"></i> <span>Milele Centre, Kitengela<br>P.O. Box 6341, 00100<br>Nairobi, Kenya</span></p>
+              <p class="flex items-center gap-4"><i class="fas fa-phone-alt text-emerald-600 text-2xl"></i> 0207 856 955</p>
+              <p class="flex items-center gap-4"><i class="fab fa-whatsapp text-emerald-600 text-2xl"></i> 0733 336 362</p>
+              <p class="flex items-center gap-4"><i class="far fa-envelope text-emerald-600 text-2xl"></i> info@rusingatrading.co.ke</p>
+              <div class="border-t border-teal-100 pt-6 mt-6">
+                <h4 class="font-bold text-gray-800 mb-3">Business Hours</h4>
+                <p class="text-gray-600">Monday – Friday: 8:00 AM – 5:00 PM</p>
+                <p class="text-gray-600">Saturday: 9:00 AM – 1:00 PM</p>
+                <p class="text-gray-600">Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-teal-50 rounded-2xl p-6 flex flex-col items-center justify-center border border-teal-200">
+            <i class="fas fa-map-marked-alt text-6xl text-emerald-600 mb-4"></i>
+            <p class="text-gray-600 text-center text-lg">We are headquartered in Nairobi, serving clients nationwide. Contact us for trade pricing, samples, or to schedule a consultation.</p>
+            <div class="mt-8 flex gap-4">
+              <a href="https://wa.me/254733336362" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-full font-medium shadow-md transition flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+              <a href="tel:+254207856955" class="bg-white border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 px-6 py-3 rounded-full font-medium transition flex items-center gap-2"><i class="fas fa-phone-alt"></i> Call now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-emerald-900 text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="logo.jpg" alt="logo" class="w-10 h-10 rounded-full border border-white/70">
+        <span class="font-bold text-xl">Rusinga Trading Company</span>
+      </div>
+      <p class="text-emerald-200 text-sm md:text-base">✨ first impression starts with clean</p>
+      <p class="text-sm text-emerald-300">© 2025 Rusinga Trading — professional cleaning solutions</p>
+    </div>
+  </footer>
+
+  <!-- dynamic year script -->
+  <script>
+    (function() {
+      const footerYear = document.querySelector('footer p:last-child');
+      if (footerYear) {
+        const currentYear = new Date().getFullYear();
+        footerYear.innerHTML = footerYear.innerHTML.replace('2025', currentYear);
+      }
+    })();
+  </script>
+</body>
+</html>

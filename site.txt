@@ -1,0 +1,65 @@
+make a professional website help add more and improve and make the site dynamic use best practises
+in the landing page add main-banner.jpeg image in the backgroung help automate every item and site to load faster 
+
+
+use tail wind images are in the same folder as index.html
+use all necessary effort to improve the site better and professional the user sells products 
+
+under Rusinga Trading Company in the title add the logo.jpg 
+our patners add our-patner1.jpeg, our-patner2.jpeg, our-patner3.jpeg, 
+our-patner4.jpeg, 
+our-patner5.jpg, our-patner6.jpg
+
+for the images below add where relevant 
+{commercial-detergent.jpeg 
+fabric-softener.jpeg
+regular-breach.jpeg
+washing-liquid .jpeg
+washing-liquid.jpeg
+main-banner.jpeg}
+
+make the images visible
+dont show msg for the source code restriction
+make the site dynamic 
+use best practises 
+use best colors to attract customes 
+help improve where you can 
+
+
+slogan (
+first impression starts with clean)
+
+Landing page add (LAUNDRY • KITCHEN • FLOOR CARE • HOUSEKEEPING
+✨ commercial grade
+•
+🌿 eco friendly
+•
+🧼 effective)
+
+first impression starts with clean add  image [main-banner.jpeg]
+
+add this as the products 
+[
+Singa Commercial Detergent
+Heavy duty, low suds – for industrial laundry
+
+Fabric softener
+Singa Fabric Softener
+long-lasting freshness, reduces static
+
+Singa Regular Bleach
+stain removal & whitening power
+
+Singa Washing Liquid
+deep clean for laundry & delicate fabrics
+
+
+]
+
+add this as contacts 0207 856 955 / 
+
+whatsapp - 0733 336 362
+📧 info@rusingatrading.co.ke
+📍 Nairobi, Kenya
+
+add all floating social media apps 
